@@ -449,6 +449,7 @@
     <ClCompile Include="Settings\USBDeviceAddToWhitelistDialog.cpp" />
     <ClCompile Include="ToolBar.cpp" />
     <ClCompile Include="Translation.cpp" />
+    <ClCompile Include="TWWTools\ClientIO.cpp" />
     <ClCompile Include="Updater.cpp" />
     <ClCompile Include="WiiUpdate.cpp" />
   </ItemGroup>
@@ -465,6 +466,8 @@
     <ClInclude Include="ResourcePackManager.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="Translation.h" />
+    <ClInclude Include="TWWTools\ClientIO.h" />
+    <ClInclude Include="TWWTools\Items.h" />
     <ClInclude Include="WiiUpdate.h" />
   </ItemGroup>
   <ItemGroup>
