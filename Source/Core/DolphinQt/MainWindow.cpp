@@ -739,8 +739,8 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
       StartGame(selection->GetFilePath(), ScanForSecondDisc::Yes, savestate_path);
       EnableScreenSaver(false);
       std::string bootedGame = selection->GetGameID();
-      if (bootedGame == "GLZE99")
-        TWWTools::SendClient("Started TWW Randomizer iso");
+      std::string bootedMsg = "Booted iso " + bootedGame;
+      TWWTools::SendClient(bootedMsg);
     }
     else
     {
