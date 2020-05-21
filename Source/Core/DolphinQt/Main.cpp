@@ -134,6 +134,10 @@ int main(int argc, char* argv[])
   FreeConsole();
 #endif
 
+  std::cout << "Test string! Can I find it in an external application?" << std::endl;
+  std::cout << "How about ";
+  std::cout << "this one?" << std::endl;
+
   UICommon::SetUserDirectory(static_cast<const char*>(options.get("user")));
   UICommon::CreateDirectories();
   UICommon::Init();
