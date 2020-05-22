@@ -57,6 +57,8 @@
 #include "Core/State.h"
 
 #include "TWWTools/ClientIO.h"
+#include "TWWTools/WindWaker.h"
+#include "TWWTools/UI.h"
 
 #include "DiscIO/NANDImporter.h"
 
@@ -730,6 +732,21 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
   if (Core::GetState() == Core::State::Paused)
   {
     Core::SetState(Core::State::Running);
+    // Adding stuff to test here
+    TWWTools::PlayerStatus playerStatus;
+    playerStatus.ReadFromMemory();
+    TWWTools::PrintMessage(std::to_string((int)playerStatus.status.maxHP) + " " + 
+      std::to_string((int)playerStatus.status.currentHP) + " " +
+      std::to_string((int)playerStatus.status.currentRupees) + " " +
+      std::to_string((int)playerStatus.status.buttonItemX) + " " +
+      std::to_string((int)playerStatus.status.buttonItemY) + " " +
+      std::to_string((int)playerStatus.status.buttonItemZ) + " " +
+      std::to_string((int)playerStatus.status.equippedSword) + " " +
+      std::to_string((int)playerStatus.status.equippedShield) + " " +
+      std::to_string((int)playerStatus.status.equippedBracelets) + " " +
+      std::to_string((int)playerStatus.status.wallet) + " " +
+      std::to_string((int)playerStatus.status.maxMagic) + " " +
+      std::to_string((int)playerStatus.status.currentMagic));
   }
   else
   {
@@ -739,8 +756,16 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
       StartGame(selection->GetFilePath(), ScanForSecondDisc::Yes, savestate_path);
       EnableScreenSaver(false);
       std::string bootedGame = selection->GetGameID();
-      std::string bootedMsg = "Booted iso " + bootedGame;
-      TWWTools::SendClient(bootedMsg);
+      if (bootedGame.find("GLZE99") != std::string::npos)
+      {
+        std::string bootedMsg = "Booted The Wind Waker Randomizer ISO";
+        TWWTools::SendClient(bootedMsg);
+      }
+      else
+      {
+        TWWTools::SendClient("Booted ISO is not Wind Waker Randomizer!");
+      }
+        
     }
     else
     {

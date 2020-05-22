@@ -450,6 +450,8 @@
     <ClCompile Include="ToolBar.cpp" />
     <ClCompile Include="Translation.cpp" />
     <ClCompile Include="TWWTools\ClientIO.cpp" />
+    <ClCompile Include="TWWTools\UI.cpp" />
+    <ClCompile Include="TWWTools\WindWaker.cpp" />
     <ClCompile Include="Updater.cpp" />
     <ClCompile Include="WiiUpdate.cpp" />
   </ItemGroup>
@@ -468,6 +470,8 @@
     <ClInclude Include="Translation.h" />
     <ClInclude Include="TWWTools\ClientIO.h" />
     <ClInclude Include="TWWTools\Items.h" />
+    <ClInclude Include="TWWTools\UI.h" />
+    <ClInclude Include="TWWTools\WindWaker.h" />
     <ClInclude Include="WiiUpdate.h" />
   </ItemGroup>
   <ItemGroup>
