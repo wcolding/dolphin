@@ -10,6 +10,7 @@ namespace TWWTools
     {
       std::cout << buffer[i];
     }
+    std::cout << std::endl;
   }
 
   
