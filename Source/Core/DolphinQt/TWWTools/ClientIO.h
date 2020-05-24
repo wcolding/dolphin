@@ -1,12 +1,13 @@
 #pragma once
-#include <iostream>
 #include <string>
+
+#define SEND_PLAYERSTATUS 1
 
 namespace TWWTools
 {
-  void SendClient(std::string msg);
+  void SendClient(int msgType, char* buffer);
 
-  std::string ReadClient();
+  //char* ReadClient();
 
 
 

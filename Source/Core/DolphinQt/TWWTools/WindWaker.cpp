@@ -57,9 +57,6 @@ namespace TWWTools
     memset(&statusBuffer, 0, sizeof(statusBuffer));
     playerStatus.ReadFromMemory();
     memcpy(&statusBuffer, &playerStatus, sizeof(playerStatus));
-
-    for (int i = 0; i < sizeof(statusBuffer); i++)
-      std::cout << statusBuffer[i];
-    std::cout << std::endl;
+    SendClient(SEND_PLAYERSTATUS, statusBuffer);
   }
 }

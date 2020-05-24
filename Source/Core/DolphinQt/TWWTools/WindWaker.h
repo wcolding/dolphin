@@ -51,6 +51,8 @@ namespace TWWTools
     u16 currentRupees;
     u8 maxMagic;
     u8 currentMagic;
+  private:
+    u8 padding[3];
   };
 
   struct Inventory
@@ -80,6 +82,8 @@ namespace TWWTools
     u8 shield;
     u8 bracelets;
     u8 spinAttack;
+  private:
+    u8 padding[3];
   };
 
   // These track current ammo, capacity, and tell the game whether to drop ammo or not
@@ -110,6 +114,8 @@ namespace TWWTools
     u8 pearls;
     u8 statues;
     u64 charts;
+  private:
+    u8 padding[3];
   };
 
   struct PlayerStatus

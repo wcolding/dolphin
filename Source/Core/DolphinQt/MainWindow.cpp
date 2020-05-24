@@ -748,12 +748,12 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
       std::string bootedGame = selection->GetGameID();
       if (bootedGame.find("GLZE99") != std::string::npos)
       {
-        std::string bootedMsg = "Booted The Wind Waker Randomizer ISO";
-        TWWTools::SendClient(bootedMsg);
+        //std::string bootedMsg = "Booted The Wind Waker Randomizer ISO";
+        //TWWTools::SendClient(bootedMsg);
       }
       else
       {
-        TWWTools::SendClient("Booted ISO is not Wind Waker Randomizer!");
+        //TWWTools::SendClient("Booted ISO is not Wind Waker Randomizer!");
       }
         
     }

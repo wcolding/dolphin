@@ -1,16 +1,16 @@
 #include "ClientIO.h"
+#include <iostream>
 
 namespace TWWTools
 {
-  void SendClient(std::string msg)
+  void SendClient(int msgType, char* buffer)
   {
-    std::cout << msg << std::endl;
+    std::cout << msgType;
+    for (int i = 0; i < sizeof(buffer); i++)
+    {
+      std::cout << buffer[i];
+    }
   }
 
-  std::string ReadClient()
-  {
-    std::string msg = "";
-    std::getline(std::cin, msg);
-    return msg;
-  }
+  
 }
