@@ -1,4 +1,5 @@
 #include "WindWaker.h"
+#include "ClientIO.h"
 #include "Core/PowerPC/Gekko.h"
 #include "Core/PowerPC/PowerPC.h"
 #include "Core/PowerPC/MMU.h"
@@ -44,8 +45,19 @@ namespace TWWTools
     questStatus.charts    = Memory::Read_U64(PLAYER_CHARTS_ADDR);
   }
 
-  StageID GetStageID()
+  u8 GetStageID()
   {
-    return (StageID)(PowerPC::Read_U8(0x803C53A4));
+    return PowerPC::Read_U8(0x803C53A4);
+  }
+
+  void WindWakerTrainerFrame()
+  {
+    PlayerStatus playerStatus;
+    char statusBuffer[sizeof(playerStatus)];
+    memset(&statusBuffer, 0, sizeof(statusBuffer));
+    playerStatus.ReadFromMemory();
+    memcpy(&statusBuffer, &playerStatus, sizeof(playerStatus));
+    std::string outData = statusBuffer;
+    SendClient(outData);
   }
 }

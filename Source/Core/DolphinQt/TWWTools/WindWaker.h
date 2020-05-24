@@ -123,5 +123,7 @@ namespace TWWTools
     void ReadFromMemory();
   };
 
-  StageID GetStageID();
+  u8 GetStageID();
+
+  void WindWakerTrainerFrame();
 }
