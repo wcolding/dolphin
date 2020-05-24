@@ -1,8 +1,4 @@
 #pragma once
-#include "Core/PowerPC/Gekko.h"
-#include "Core/PowerPC/PowerPC.h"
-#include "Core/PowerPC/MMU.h"
-#include "Core/HW/Memmap.h"
 
 #define PLAYER_STATUS_ADDR 0x803C4C08
 #define PLAYER_INV_ADDR    0x803C4C44
@@ -10,6 +6,14 @@
 #define PLAYER_BAGS_ADDR   0x803C4C7E
 #define PLAYER_QUEST_ADDR  0x803C4CBC
 #define PLAYER_CHARTS_ADDR 0x803C4CDC
+
+#define PLAYER_BOWS  0x803C4C65
+#define PLAYER_BOMBS 0x803C4C66
+#define PLAYER_BUTTONS 0x803CA7DB
+
+#define ADD_KEYS 0x803CA77C
+
+#define READ_BUFFER_SIZE 64
 
 namespace TWWTools
 {
@@ -41,19 +45,10 @@ namespace TWWTools
 
   struct Status
   {
-  public:
     u16 maxHP;
     u16 currentHP;
-    u16 currentRupees;
-    u8 buttonItemX;
-    u8 buttonItemY;
-    u8 buttonItemZ;
-  private:u16 ignore;
-  public:
-    u8 equippedSword;
-    u8 equippedShield;
-    u8 equippedBracelets;
     u8 wallet;
+    u16 currentRupees;
     u8 maxMagic;
     u8 currentMagic;
   };
@@ -81,22 +76,19 @@ namespace TWWTools
     u8 deliveryBag;
     u8 hookshot;
     u8 skullHammer;
+    u8 sword;
+    u8 shield;
+    u8 bracelets;
+    u8 spinAttack;
   };
 
   // These track current ammo, capacity, and tell the game whether to drop ammo or not
   struct Ammo
   {
-  public:
-    u8 ownedBows;
-    u8 ownedBombs;
-  private: u32 ignore;
-  public:
-    u8 bowAmmo;
-    u8 bombAmmo;
-  private: u8 ignoreB;
-  public:
     u8 bowCapacity;
+    u8 bowAmmo;
     u8 bombCapacity;
+    u8 bombAmmo;
   };
 
   struct BagSection
@@ -110,13 +102,16 @@ namespace TWWTools
   {
     u8 swords; // checked by randomizer progressive sword code
     u8 shields;
+    u8 bows;
+    u8 bombs;
     u8 bracelets;
-    u8 piratesCharm;
-    u8 herosCharm;
     u8 songs;
     u8 triforce;
     u8 pearls;
+    u8 statues;
+    u64 charts;
   };
+
   struct PlayerStatus
   {
     Status status;
@@ -124,7 +119,6 @@ namespace TWWTools
     Ammo ammo;
     BagSection bags;
     QuestStatus questStatus;
-    u64 charts;
 
     void ReadFromMemory();
   };

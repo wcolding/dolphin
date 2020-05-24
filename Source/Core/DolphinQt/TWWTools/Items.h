@@ -111,5 +111,19 @@ namespace TWWTools
     Farore = 0x04
   } WWPearlMask;
 
+  typedef enum : u8
+  {
+    Empty = 0x50,
+    RedPotion = 0x51,
+    GreenPotion = 0x52,
+    BluePotion = 0x53,
+    HalfSoup = 0x54,
+    FullSoup = 0x55,
+    Water = 0x56,
+    Fairy = 0x57,
+    Firefly = 0x58,
+    ForestWater = 0x59
+  } WWBottleContents;
+
 
 }

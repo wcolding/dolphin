@@ -59,6 +59,7 @@
 #include "TWWTools/ClientIO.h"
 #include "TWWTools/WindWaker.h"
 #include "TWWTools/UI.h"
+#include "TWWTools/ZeldaMacros.h"
 
 #include "DiscIO/NANDImporter.h"
 
@@ -733,20 +734,9 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
   {
     Core::SetState(Core::State::Running);
     // Adding stuff to test here
-    TWWTools::PlayerStatus playerStatus;
-    playerStatus.ReadFromMemory();
-    TWWTools::PrintMessage(std::to_string((int)playerStatus.status.maxHP) + " " + 
-      std::to_string((int)playerStatus.status.currentHP) + " " +
-      std::to_string((int)playerStatus.status.currentRupees) + " " +
-      std::to_string((int)playerStatus.status.buttonItemX) + " " +
-      std::to_string((int)playerStatus.status.buttonItemY) + " " +
-      std::to_string((int)playerStatus.status.buttonItemZ) + " " +
-      std::to_string((int)playerStatus.status.equippedSword) + " " +
-      std::to_string((int)playerStatus.status.equippedShield) + " " +
-      std::to_string((int)playerStatus.status.equippedBracelets) + " " +
-      std::to_string((int)playerStatus.status.wallet) + " " +
-      std::to_string((int)playerStatus.status.maxMagic) + " " +
-      std::to_string((int)playerStatus.status.currentMagic));
+    //TWWTools::PlayerStatus playerStatus;
+    //playerStatus.ReadFromMemory();
+    TWWTools::GiveBracelet();
   }
   else
   {

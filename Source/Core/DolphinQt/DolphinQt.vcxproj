@@ -452,6 +452,7 @@
     <ClCompile Include="TWWTools\ClientIO.cpp" />
     <ClCompile Include="TWWTools\UI.cpp" />
     <ClCompile Include="TWWTools\WindWaker.cpp" />
+    <ClCompile Include="TWWTools\ZeldaMacros.cpp" />
     <ClCompile Include="Updater.cpp" />
     <ClCompile Include="WiiUpdate.cpp" />
   </ItemGroup>
@@ -472,6 +473,7 @@
     <ClInclude Include="TWWTools\Items.h" />
     <ClInclude Include="TWWTools\UI.h" />
     <ClInclude Include="TWWTools\WindWaker.h" />
+    <ClInclude Include="TWWTools\ZeldaMacros.h" />
     <ClInclude Include="WiiUpdate.h" />
   </ItemGroup>
   <ItemGroup>
