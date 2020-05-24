@@ -84,6 +84,7 @@
 #include "VideoCommon/VideoBackendBase.h"
 #include "VideoCommon/VideoConfig.h"
 
+
 namespace Core
 {
 static bool s_wants_determinism;
@@ -146,6 +147,7 @@ void OnFrameEnd()
   if (s_memory_watcher)
     s_memory_watcher->Step();
 #endif
+
 }
 
 // Display messages and return values

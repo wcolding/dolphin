@@ -736,7 +736,7 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
     // Adding stuff to test here
     //TWWTools::PlayerStatus playerStatus;
     //playerStatus.ReadFromMemory();
-    TWWTools::GiveBracelet();
+    TWWTools::WindWakerTrainerFrame();
   }
   else
   {
