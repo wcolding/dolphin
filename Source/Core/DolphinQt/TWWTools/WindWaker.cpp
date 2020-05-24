@@ -53,11 +53,11 @@ namespace TWWTools
   void WindWakerTrainerFrame()
   {
     PlayerStatus playerStatus;
-    char statusBuffer[sizeof(playerStatus)];
+    char statusBuffer[sizeof(playerStatus) + 1]; // Null-terminated for string conversion
     memset(&statusBuffer, 0, sizeof(statusBuffer));
     playerStatus.ReadFromMemory();
     memcpy(&statusBuffer, &playerStatus, sizeof(playerStatus));
-    std::string outData = statusBuffer;
+    std::string outData = std::string(statusBuffer);
     SendClient(outData);
   }
 }
