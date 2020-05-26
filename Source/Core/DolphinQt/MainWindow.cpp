@@ -736,7 +736,8 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
     // Adding stuff to test here
     //TWWTools::PlayerStatus playerStatus;
     //playerStatus.ReadFromMemory();
-    TWWTools::WindWakerTrainerFrame();
+    //TWWTools::WindWakerTrainerFrame();
+    TWWTools::SendRawAndEcho("Unpaused");
   }
   else
   {
@@ -748,12 +749,12 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
       std::string bootedGame = selection->GetGameID();
       if (bootedGame.find("GLZE99") != std::string::npos)
       {
-        //std::string bootedMsg = "Booted The Wind Waker Randomizer ISO";
-        //TWWTools::SendClient(bootedMsg);
+        std::string bootedMsg = "Booted The Wind Waker Randomizer ISO";
+        TWWTools::SendRawAndEcho(bootedMsg);
       }
       else
       {
-        //TWWTools::SendClient("Booted ISO is not Wind Waker Randomizer!");
+        TWWTools::SendRawAndEcho("Booted ISO is not Wind Waker Randomizer!");
       }
         
     }

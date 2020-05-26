@@ -1,5 +1,6 @@
 #include "WindWaker.h"
 #include "ClientIO.h"
+#include <iostream>
 #include "Core/PowerPC/Gekko.h"
 #include "Core/PowerPC/PowerPC.h"
 #include "Core/PowerPC/MMU.h"
@@ -53,10 +54,11 @@ namespace TWWTools
   void WindWakerTrainerFrame()
   {
     PlayerStatus playerStatus;
-    char statusBuffer[sizeof(playerStatus)];
-    memset(&statusBuffer, 0, sizeof(statusBuffer));
+    char statusBuffer[PLAYER_STATUS_SIZE];
+    memset(&statusBuffer, 0, PLAYER_STATUS_SIZE);
     playerStatus.ReadFromMemory();
-    memcpy(&statusBuffer, &playerStatus, sizeof(playerStatus));
-    SendClient(SEND_PLAYERSTATUS, statusBuffer);
+    memcpy(&statusBuffer, &playerStatus, PLAYER_STATUS_SIZE);
+    std::cout << "Unpaused Dolphin." << std::endl;
+    //SendClient(SEND_PLAYERSTATUS, statusBuffer, PLAYER_STATUS_SIZE);
   }
 }

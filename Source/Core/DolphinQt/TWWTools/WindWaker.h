@@ -14,6 +14,7 @@
 #define ADD_KEYS 0x803CA77C
 
 #define READ_BUFFER_SIZE 64
+#define PLAYER_STATUS_SIZE 104
 
 namespace TWWTools
 {

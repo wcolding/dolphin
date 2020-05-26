@@ -5,11 +5,11 @@
 
 namespace TWWTools
 {
-  void SendClient(int msgType, char* buffer);
+  void SendClient(int msgType, char* buffer, size_t len);
 
   //char* ReadClient();
 
-
+  void SendRawAndEcho(std::string msg);
 
 
 }
