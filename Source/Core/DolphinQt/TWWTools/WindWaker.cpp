@@ -58,7 +58,6 @@ namespace TWWTools
     memset(&statusBuffer, 0, PLAYER_STATUS_SIZE);
     playerStatus.ReadFromMemory();
     memcpy(&statusBuffer, &playerStatus, PLAYER_STATUS_SIZE);
-    std::cout << "Unpaused Dolphin." << std::endl;
     //SendClient(SEND_PLAYERSTATUS, statusBuffer, PLAYER_STATUS_SIZE);
   }
 }

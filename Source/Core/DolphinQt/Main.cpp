@@ -34,6 +34,7 @@
 #include "UICommon/CommandLineParse.h"
 #include "UICommon/UICommon.h"
 
+
 static bool QtMsgAlertHandler(const char* caption, const char* text, bool yes_no,
                               Common::MsgType style)
 {
@@ -99,7 +100,8 @@ static bool QtMsgAlertHandler(const char* caption, const char* text, bool yes_no
 // /SubSystem:Windows
 int main(int argc, char* argv[])
 {
-  std::cout << "Test" << std::endl;
+ 
+
 #ifdef _WIN32
   const bool console_attached = AttachConsole(ATTACH_PARENT_PROCESS) != FALSE;
   HANDLE stdout_handle = ::GetStdHandle(STD_OUTPUT_HANDLE);
@@ -136,7 +138,6 @@ int main(int argc, char* argv[])
 #endif
 
 
-  std::cout << "Test part deux" << std::endl;
 
   UICommon::SetUserDirectory(static_cast<const char*>(options.get("user")));
   UICommon::CreateDirectories();

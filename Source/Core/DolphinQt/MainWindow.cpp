@@ -120,6 +120,9 @@
 #include "VideoCommon/NetPlayChatUI.h"
 #include "VideoCommon/VideoConfig.h"
 
+#include <algorithm>
+#include <string>
+
 #if defined(HAVE_XRANDR) && HAVE_XRANDR
 #include "UICommon/X11Utils.h"
 // This #define within X11/X.h conflicts with our WiimoteSource enum.
@@ -142,6 +145,8 @@ static void InstallSignalHandler()
   sigaction(SIGTERM, &sa, nullptr);
 }
 #endif
+
+DWORD WINAPI WindWakerTrainerThread(LPVOID lpParam);
 
 static WindowSystemType GetWindowSystemType()
 {
@@ -733,11 +738,10 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
   if (Core::GetState() == Core::State::Paused)
   {
     Core::SetState(Core::State::Running);
+
     // Adding stuff to test here
-    //TWWTools::PlayerStatus playerStatus;
-    //playerStatus.ReadFromMemory();
-    //TWWTools::WindWakerTrainerFrame();
-    TWWTools::SendRawAndEcho("Unpaused");
+
+    
   }
   else
   {
@@ -746,15 +750,32 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
     {
       StartGame(selection->GetFilePath(), ScanForSecondDisc::Yes, savestate_path);
       EnableScreenSaver(false);
+
       std::string bootedGame = selection->GetGameID();
-      if (bootedGame.find("GLZE99") != std::string::npos)
+      std::string TWWRandoID = "GLZE99";
+      if (bootedGame.find(TWWRandoID) != std::string::npos)
       {
-        std::string bootedMsg = "Booted The Wind Waker Randomizer ISO";
-        TWWTools::SendRawAndEcho(bootedMsg);
+
+        std::string bootedMsg = "Booted The Wind Waker Randomizer ISO\r\n";
+        DWORD TWWThreadID = 0;
+        CreateThread(
+          NULL,                   // default security attributes
+          0,                      // use default stack size  
+          WindWakerTrainerThread,       // thread function name
+          0,          // argument to thread function 
+          0,                      // use default creation flags 
+          &TWWThreadID); 
       }
       else
       {
-        TWWTools::SendRawAndEcho("Booted ISO is not Wind Waker Randomizer!");
+        DWORD TWWThreadID = 0;
+        CreateThread(
+          NULL,                   // default security attributes
+          0,                      // use default stack size  
+          WindWakerTrainerThread,       // thread function name
+          0,          // argument to thread function 
+          0,                      // use default creation flags 
+          &TWWThreadID);
       }
         
     }
@@ -1752,4 +1773,30 @@ void MainWindow::Show()
     StartGame(std::move(m_pending_boot));
     m_pending_boot.reset();
   }
+}
+
+DWORD WINAPI WindWakerTrainerThread(LPVOID lpParam)
+{
+  TWWTools::ClientHandler client;
+
+  Sleep(5000);
+  //while (Memory::GetRamSizeReal() < 1)
+  //{
+  //  // Wait for game to load
+  //}
+
+  TWWTools::PlayerStatus playerStatus;
+
+  char statusBuffer[PLAYER_STATUS_SIZE];
+  memset(&statusBuffer, 0, PLAYER_STATUS_SIZE);
+
+
+  while (true)
+  {
+    playerStatus.ReadFromMemory();
+    memcpy(&statusBuffer, &playerStatus, PLAYER_STATUS_SIZE);
+    client.SendClient(SEND_PLAYERSTATUS, statusBuffer, PLAYER_STATUS_SIZE);
+    Sleep(3000);
+  }
+  return 0;
 }

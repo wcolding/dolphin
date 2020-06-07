@@ -1,4 +1,5 @@
 #include "UI.h"
+#include "WindWaker.h"
 
 namespace TWWTools
 {

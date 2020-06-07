@@ -1,33 +1,40 @@
 #include "ClientIO.h"
-#include "UI.h"
+//#include "UI.h"
 #include <iostream>
 
 namespace TWWTools
 {
-  void SendClient(int msgType, char* buffer, size_t len)
+  void ClientHandler::SendClient(int msgType, char* buffer, size_t len)
   {
-    char typeBuffer[4];
-    memcpy(&typeBuffer, &msgType, 4);
+    if (!clientConnected)
+      return;
 
-    for (int i = 0; i < 4; i++)
-    {
-      std::cout << typeBuffer[i];
-    }
+    char msg[PIPE_BUFFER_SIZE];
+    memset(&msg, 0, PIPE_BUFFER_SIZE);
+    memcpy(&msg, &msgType, 4);
+    memcpy(&msg[4], buffer, len);
 
-    for (int i = 0; i < len; i++)
-    {
-      std::cout << buffer[i];
-    }
-
-    //std::cout << std::endl;
-    PrintMessage("Buffer size " + std::to_string(len) + " written");
+    WriteFile(outPipe, msg, (DWORD)(len + 4), bytesWritten, 0);
+    //PrintMessage("Buffer size " + std::to_string(len) + " written");
   }
 
-
-  void SendRawAndEcho(std::string msg)
+  ClientHandler::ClientHandler()
   {
-    std::cout << msg << std::endl;
-    PrintMessage(msg);
+    outPipe = INVALID_HANDLE_VALUE;
+    inPipe = INVALID_HANDLE_VALUE;
+
+    while (true)
+    {
+      outPipe = CreateFile(DOLPHIN_OUT_PIPE, GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+
+      if (outPipe != INVALID_HANDLE_VALUE)
+        break;
+
+      if (GetLastError() != ERROR_PIPE_BUSY)
+        break;
+    }
+
+    clientConnected = true;
   }
 
 }
