@@ -14,7 +14,7 @@
 #define ADD_KEYS 0x803CA77C
 
 #define READ_BUFFER_SIZE 64
-#define PLAYER_STATUS_SIZE 104
+#define PLAYER_STATUS_SIZE 79
 
 namespace TWWTools
 {
@@ -39,12 +39,14 @@ namespace TWWTools
     Test = 15
   } StageID;
 
+#pragma pack(push, 1)
+
   struct Bag
   {
     u8 contents[8];
   };
 
-  struct Status
+  struct Status // 9 bytes
   {
     u16 maxHP;
     u16 currentHP;
@@ -52,11 +54,9 @@ namespace TWWTools
     u16 currentRupees;
     u8 maxMagic;
     u8 currentMagic;
-  private:
-    u8 padding[3];
   };
 
-  struct Inventory
+  struct Inventory // 25 bytes
   {
     u8 telescope;
     u8 sail;
@@ -83,12 +83,10 @@ namespace TWWTools
     u8 shield;
     u8 bracelets;
     u8 spinAttack;
-  private:
-    u8 padding[3];
   };
 
   // These track current ammo, capacity, and tell the game whether to drop ammo or not
-  struct Ammo
+  struct Ammo // 4 bytes
   {
     u8 bowCapacity;
     u8 bowAmmo;
@@ -96,14 +94,14 @@ namespace TWWTools
     u8 bombAmmo;
   };
 
-  struct BagSection
+  struct BagSection // 24 bytes
   {
     Bag spoilsBag;
     Bag baitBag;
     Bag deliveryBag;
   };
 
-  struct QuestStatus
+  struct QuestStatus // 17 bytes
   {
     u8 swords; // checked by randomizer progressive sword code
     u8 shields;
@@ -115,8 +113,6 @@ namespace TWWTools
     u8 pearls;
     u8 statues;
     u64 charts;
-  private:
-    u8 padding[3];
   };
 
   struct PlayerStatus
@@ -129,6 +125,8 @@ namespace TWWTools
 
     void ReadFromMemory();
   };
+
+#pragma pack(pop)
 
   u8 GetStageID();
 
