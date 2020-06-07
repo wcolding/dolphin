@@ -752,7 +752,7 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
       EnableScreenSaver(false);
 
       std::string bootedGame = selection->GetGameID();
-      std::string TWWRandoID = "GLZE99";
+      std::string TWWRandoID = "GZLE99";
       if (bootedGame.find(TWWRandoID) != std::string::npos)
       {
 
@@ -768,14 +768,6 @@ void MainWindow::Play(const std::optional<std::string>& savestate_path)
       }
       else
       {
-        DWORD TWWThreadID = 0;
-        CreateThread(
-          NULL,                   // default security attributes
-          0,                      // use default stack size  
-          WindWakerTrainerThread,       // thread function name
-          0,          // argument to thread function 
-          0,                      // use default creation flags 
-          &TWWThreadID);
       }
         
     }
