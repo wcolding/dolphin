@@ -8,6 +8,8 @@
 #define PIPE_BUFFER_SIZE 256
 
 #define SEND_PLAYERSTATUS 1
+#define SEND_WORLDSTATE 2
+#define GIVE_ITEM 3
 
 namespace TWWTools
 {
@@ -18,12 +20,15 @@ namespace TWWTools
     bool clientConnected = false;
 
     void SendClient(int msgType, char* buffer, size_t len);
+    void ReceiveClient();
     ClientHandler();
 
   private:
     HANDLE outPipe;
     HANDLE inPipe;
-    LPDWORD bytesWritten = 0;
+    LPDWORD bytesIO = 0;
+
+    static DWORD WINAPI ClientReadThread(LPVOID lpParam);
   };
 
 }

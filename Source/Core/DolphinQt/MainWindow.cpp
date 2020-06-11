@@ -1771,7 +1771,7 @@ DWORD WINAPI WindWakerTrainerThread(LPVOID lpParam)
 {
   TWWTools::ClientHandler client;
 
-  Sleep(5000);
+  Sleep(3000);
   //while (Memory::GetRamSizeReal() < 1)
   //{
   //  // Wait for game to load
@@ -1782,13 +1782,12 @@ DWORD WINAPI WindWakerTrainerThread(LPVOID lpParam)
   char statusBuffer[PLAYER_STATUS_SIZE];
   memset(&statusBuffer, 0, PLAYER_STATUS_SIZE);
 
-
   while (true)
   {
     playerStatus.ReadFromMemory();
     memcpy(&statusBuffer, &playerStatus, PLAYER_STATUS_SIZE);
     client.SendClient(SEND_PLAYERSTATUS, statusBuffer, PLAYER_STATUS_SIZE);
-    Sleep(3000);
+    Sleep(500);
   }
   return 0;
 }

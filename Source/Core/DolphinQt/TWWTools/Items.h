@@ -1,5 +1,7 @@
 #pragma once
 
+typedef unsigned char u8;
+
 namespace TWWTools
 {
   typedef enum : u8
