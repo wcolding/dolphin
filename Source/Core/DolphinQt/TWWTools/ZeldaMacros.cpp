@@ -2,6 +2,9 @@
 #include "Items.h"
 #include "WindWaker.h"
 
+
+// TODO: add code for X Y Z button upgrades
+
 namespace TWWTools
 {
   void GiveTelescope()

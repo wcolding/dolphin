@@ -10,6 +10,7 @@
 #define SEND_PLAYERSTATUS 1
 #define SEND_WORLDSTATE 2
 #define GIVE_ITEM 3
+#define GIVE_KEYS 4
 
 namespace TWWTools
 {

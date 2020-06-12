@@ -43,15 +43,95 @@ namespace TWWTools
         WWItem item = (WWItem)msg[4];
         switch (item)
         {
-        case WWItem::Hookshot:
-          GiveHookshot();
+        case WWItem::Telecope:
+          GiveTelescope();
+          break;
+        case WWItem::Sail:
+          GiveSail();
+          break;
+        case WWItem::WW:
+          GiveWindWaker();
+          break;
+        case WWItem::GrapplingHook:
+          GiveGrapplingHook();
+          break;
+        case WWItem::Boomerang:
+          GiveBoomerang();
+          break;
+        case WWItem::DekuLeaf:
+          GiveDekuLeaf();
+          break;
+        case WWItem::TingleTuner:
+          GiveTingleTuner();
+          break;
+        case WWItem::PictoBox1:
+          SetPictoBox(1);
+          break;
+        case WWItem::PictoBox2:
+          SetPictoBox(2);
           break;
         case WWItem::Boots:
           GiveIronBoots();
           break;
+        case WWItem::MagicArmor:
+          GiveMagicArmor();
+          break;
+        case WWItem::BaitBag:
+          GiveBaitBag();
+          break;
+        case WWItem::Bow1:
+          SetBow(1);
+          break;
+        case WWItem::Bow2:
+          SetBow(2);
+          break;
+        case WWItem::Bow3:
+          SetBow(3);
+          break;
+        case WWItem::Bombs:
+          GiveBombBag();
+          break;
+          // skipping bottles for now
+        case WWItem::MailBag:
+          GiveMailBag();
+          break;
+        case WWItem::Hookshot:
+          GiveHookshot();
+          break;
+        case WWItem::Hammer:
+          GiveSkullHammer();
+          break;
+        case WWItem::Bracelet:
+          GiveBracelet();
+          break;
+        case WWItem::Sword1:
+          SetSword(1);
+          break;
+        case WWItem::Sword2:
+          SetSword(2);
+          break;
+        case WWItem::Sword3:
+          SetSword(3);
+          break;
+        case WWItem::Sword4:
+          SetSword(4);
+          break;
+        case WWItem::Shield1:
+          SetShield(1);
+          break;
+        case WWItem::Shield2:
+          SetShield(2);
+          break;
         default:
           break;
         }
+        break;
+      }
+      case GIVE_KEYS:
+      {
+        u16 numKeys = 0;
+        memcpy(&numKeys, &msg[4], 2);
+        AddKeys(numKeys);
         break;
       }
       default:
