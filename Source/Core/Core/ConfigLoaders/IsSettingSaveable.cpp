@@ -28,18 +28,20 @@ bool IsSettingSaveable(const Config::Location& config_location)
       return true;
   }
 
-  static constexpr std::array<const Config::Location*, 102> s_setting_saveable = {
+  static constexpr std::array<const Config::Location*, 104> s_setting_saveable = {
       // Main.Core
 
       &Config::MAIN_DEFAULT_ISO.location,
       &Config::MAIN_MEMCARD_A_PATH.location,
       &Config::MAIN_MEMCARD_B_PATH.location,
       &Config::MAIN_AUTO_DISC_CHANGE.location,
+      &Config::MAIN_ALLOW_SD_WRITES.location,
       &Config::MAIN_DPL2_DECODER.location,
       &Config::MAIN_DPL2_QUALITY.location,
       &Config::MAIN_RAM_OVERRIDE_ENABLE.location,
       &Config::MAIN_MEM1_SIZE.location,
       &Config::MAIN_MEM2_SIZE.location,
+      &Config::MAIN_GFX_BACKEND.location,
 
       // Main.Display
 

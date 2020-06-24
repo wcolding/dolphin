@@ -134,6 +134,7 @@
     <string name="wii_submenu">Wii</string>
     <string name="insert_sd_card">Insert SD Card</string>
     <string name="insert_sd_card_description">Supports SD and SDHC. Default size is 128 MB.</string>
+    <string name="wii_sd_card_allow_writes">Allow Writes to SD Card</string>
     <string name="wiimote_scanning">Wii Remote Continuous Scanning</string>
     <string name="wiimote_scanning_description">Leave this on if you are using a DolphinBar for real Wiimote support.</string>
     <string name="wiimote_speaker">Wii Remote Speaker</string>
@@ -164,6 +165,7 @@
 
     <!-- Path Settings -->
     <string name="paths_submenu">Paths</string>
+    <string name="search_subfolders">Search Subfolders for Game Files</string>
     <string name="default_ISO">Default ISO</string>
     <string name="wii_NAND_root">Wii NAND Root</string>
     <string name="dump_path">Dump Path</string>
@@ -330,7 +332,7 @@
     <string name="emulation_quicksave">Quick Save</string>
     <string name="emulation_quickload">Quick Load</string>
     <string name="emulation_refresh_wiimotes">Refresh Wii Remotes</string>
-    <string name="emulation_configure_controls">Configure Controls</string>
+    <string name="emulation_overlay_controls">Overlay Controls</string>
     <string name="emulation_edit_layout">Edit Layout</string>
     <string name="emulation_done">Done</string>
     <string name="emulation_toggle_controls">Toggle Controls</string>
@@ -375,5 +377,7 @@
     <string name="pitch">Total Pitch</string>
     <string name="yaw">Total Yaw</string>
     <string name="vertical_offset">Vertical Offset</string>
+    <string name="disc_number">Disc %1$d</string>
+    <string name="disabled_gc_overlay_notice">GameCube Controller 1 is set to \"None\"</string>
 
 </resources>

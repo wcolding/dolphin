@@ -696,8 +696,8 @@ QStringList MainWindow::PromptFileNames()
   QStringList paths = QFileDialog::getOpenFileNames(
       this, tr("Select a File"),
       settings.value(QStringLiteral("mainwindow/lastdir"), QString{}).toString(),
-      tr("All GC/Wii files (*.elf *.dol *.gcm *.iso *.tgc *.wbfs *.ciso *.gcz *.wad *.dff *.m3u);;"
-         "All Files (*)"));
+      tr("All GC/Wii files (*.elf *.dol *.gcm *.iso *.tgc *.wbfs *.ciso *.gcz *.wia *.rvz *.wad "
+         "*.dff *.m3u);;All Files (*)"));
 
   if (!paths.isEmpty())
   {
@@ -1117,7 +1117,7 @@ void MainWindow::HideRenderWidget(bool reinit)
     // The controller interface will still be registered to the old render widget, if the core
     // has booted. Therefore, we should re-bind it to the main window for now. When the core
     // is next started, it will be swapped back to the new render widget.
-    g_controller_interface.ChangeWindow(GetWindowSystemInfo(windowHandle()).render_surface);
+    g_controller_interface.ChangeWindow(GetWindowSystemInfo(windowHandle()).render_window);
   }
 }
 

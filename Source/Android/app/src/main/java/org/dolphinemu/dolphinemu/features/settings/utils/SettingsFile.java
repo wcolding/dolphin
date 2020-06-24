@@ -39,6 +39,8 @@ public final class SettingsFile
   public static final String FILE_NAME_GCPAD = "GCPadNew";
   public static final String FILE_NAME_WIIMOTE = "WiimoteNew";
 
+  public static final String KEY_DSP_ENGINE = "DSPEngine";
+  public static final String KEY_LAST_PLATFORM_TAB = "LastPlatformTab";
 
   public static final String KEY_CPU_CORE = "CPUCore";
   public static final String KEY_DUAL_CORE = "CPUThread";
@@ -47,7 +49,6 @@ public final class SettingsFile
   public static final String KEY_SPEED_LIMIT = "EmulationSpeed";
   public static final String KEY_VIDEO_BACKEND = "GFXBackend";
 
-  public static final String KEY_DSP_ENGINE = "DSPEngine";
   public static final String KEY_DSP_HLE = "DSPHLE";
   public static final String KEY_DSP_ENABLE_JIT = "EnableJIT";
   public static final String KEY_AUDIO_STRETCH = "AudioStretch";
@@ -59,6 +60,7 @@ public final class SettingsFile
   public static final String KEY_SLOT_A_DEVICE = "SlotA";
   public static final String KEY_SLOT_B_DEVICE = "SlotB";
   public static final String KEY_ENABLE_SAVE_STATES = "EnableSaveStates";
+  public static final String KEY_RECURSIVE_ISO_PATHS = "RecursiveISOPaths";
   public static final String KEY_DEFAULT_ISO = "DefaultISO";
   public static final String KEY_NAND_ROOT_PATH = "NANDRootPath";
   public static final String KEY_DUMP_PATH = "DumpPath";
@@ -118,6 +120,7 @@ public final class SettingsFile
   public static final String KEY_DEBUG_JITREGISTERCACHEOFF = "JitRegisterCacheOff";
 
   public static final String KEY_GCPAD_TYPE = "SIDevice";
+  public static final String KEY_GCPAD_PLAYER_1 = "SIDevice0";
   public static final String KEY_GCPAD_G_TYPE = "PadType";
 
   public static final String KEY_GCBIND_A = "InputA_";
@@ -279,6 +282,7 @@ public final class SettingsFile
   public static final String KEY_WIIBIND_TURNTABLE_CROSSFADE_RIGHT = "TurntableCrossRight_";
 
   public static final String KEY_WII_SD_CARD = "WiiSDCard";
+  public static final String KEY_WII_SD_CARD_ALLOW_WRITES = "WiiSDCardAllowWrites";
   public static final String KEY_WIIMOTE_SCAN = "WiimoteContinuousScanning";
   public static final String KEY_WIIMOTE_SPEAKER = "WiimoteEnableSpeaker";
 
