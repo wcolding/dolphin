@@ -1,9 +1,7 @@
 #include "ZeldaMacros.h"
 #include "Items.h"
 #include "WindWaker.h"
-
-
-// TODO: add code for X Y Z button upgrades
+#include "UI.h"
 
 namespace TWWTools
 {
@@ -58,6 +56,7 @@ namespace TWWTools
       break;
     case 2:
       Memory::Write_U8(WWItem::PictoBox2, PLAYER_INV_ADDR + 8);
+      UpdateEquipButtons(UPGRADE_PICTOBOX2);
       break;
     default:
       break;
@@ -94,10 +93,12 @@ namespace TWWTools
     case 2:
       Memory::Write_U8(WWItem::Bow2, PLAYER_INV_ADDR + 12);
       Memory::Write_U8(0b00000011, PLAYER_BOWS);
+      UpdateEquipButtons(UPGRADE_BOW2);
       break;
     case 3:
       Memory::Write_U8(WWItem::Bow3, PLAYER_INV_ADDR + 12);
       Memory::Write_U8(0b00000111, PLAYER_BOWS);
+      UpdateEquipButtons(UPGRADE_BOW3);
       break;
     default:
       break;
@@ -187,6 +188,47 @@ namespace TWWTools
     default:
       break;
     }
+  }
+
+  void UpdateEquipButtons(int command)
+  {
+    u8* equipsPtr = Memory::GetPointer(X_BUTTON_ITEM);
+    u8 equips[3];
+    memcpy(&equips, equipsPtr, 3);
+
+    switch (command)
+    {
+    case UPGRADE_PICTOBOX2:
+      for (int i = 0; i < 3; i++)
+      {
+        if (equips[i] == WWItem::PictoBox1)
+        {
+          Memory::Write_U8(WWItem::PictoBox2, X_BUTTON_ITEM + i);
+        }
+      }
+      break;
+    case UPGRADE_BOW2:
+      for (int i = 0; i < 3; i++)
+      {
+        if (equips[i] == WWItem::Bow1)
+        {
+          Memory::Write_U8(WWItem::Bow2, X_BUTTON_ITEM + i);
+        }
+      }
+      break;
+    case UPGRADE_BOW3:
+      for (int i = 0; i < 3; i++)
+      {
+        if (equips[i] == WWItem::Bow2)
+        {
+          Memory::Write_U8(WWItem::Bow3, X_BUTTON_ITEM + i);
+        }
+      }
+      break;
+    default:
+      break;
+    }
+
   }
 
   void AddKeys(u16 keys)
