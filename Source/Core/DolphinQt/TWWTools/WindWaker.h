@@ -13,8 +13,31 @@
 
 #define ADD_KEYS 0x803CA77C
 
+#define STAGEINFO_SEA       0x803C4F88
+#define STAGEINFO_SEA_ALT   0x803C4FAC
+#define STAGEINFO_FF        0x803C4FD0
+#define STAGEINFO_DRC       0x803C4FF4
+#define STAGEINFO_FW        0x803C5018
+#define STAGEINFO_TOTG      0x803C503C
+#define STAGEINFO_EARTH     0x803C5060
+#define STAGEINFO_WIND      0x803C5084
+#define STAGEINFO_GANON     0x803C50A8
+#define STAGEINFO_HYRULE    0x803C50CC
+#define STAGEINFO_SHIPS      0x803C50F0
+#define STAGEINFO_HOUSES    0x803C5114
+#define STAGEINFO_CAVES     0x803C5138
+#define STAGEINFO_CAVES_ALT 0x803C515C
+#define STAGEINFO_CHUCHU    0x803C5180
+#define STAGEINFO_LOCAL     0x803C5380
+
+#define PLAYER_NAME  0x803C4D64
+#define STAGE_ID     0x803C53A4
+#define STAGE_NAME   0x803C9D3C
+#define CURRENT_ZONE 0x803C4632    // not documented...uncharted waters so to speak
+
 #define READ_BUFFER_SIZE 64
 #define PLAYER_STATUS_SIZE 79
+#define WORLD_STATE_SIZE 562
 
 namespace TWWTools
 {
@@ -31,13 +54,24 @@ namespace TWWTools
     Wind = 7,
     Ganon = 8,
     Hyrule = 9,
-    Ship = 10,
+    Ships = 10,
     Houses = 11,
     Caves = 12,
-    CavesB = 13,
+    CavesAlt = 13,
     ChuChu = 14,
-    Test = 15
+    Test = 15,
+    Local = 0xFF
   } StageID;
+
+  typedef enum : u8
+  {
+    Map = 0,
+    Compass = 0x01,
+    BigKey = 0x02,
+    BossDead = 0x04,
+    BossHC = 0x08,
+    BossIntro = 0x10
+  } DungeonFlags;
 
 #pragma pack(push, 1)
 
@@ -126,8 +160,45 @@ namespace TWWTools
     void ReadFromMemory();
   };
 
-#pragma pack(pop)
+  struct StageInfo
+  {
+    u8 chestFlags[4];
+    u8 eventSwitches[16];
+    u8 itemPickupFlags[4];
+    u8 visitedRooms[8];
+    u8 smallKeys;
+    u8 dungeonFlags;
+  };
 
+  StageInfo GetStageInfo(u32 addr);
+
+  struct WorldState
+  {
+    char playerName[8];
+    u8 stageID;
+    char stageName[8];
+    u8 zone;
+    StageInfo sea;
+    StageInfo sea_alt;
+    StageInfo ff;
+    StageInfo drc;
+    StageInfo fw;
+    StageInfo totg;
+    StageInfo earth;
+    StageInfo wind;
+    StageInfo ganon;
+    StageInfo hyrule;
+    StageInfo ships;
+    StageInfo houses;
+    StageInfo caves;
+    StageInfo caves_alt;
+    StageInfo chuchu;
+    StageInfo local; // we don't need to track test stage flags
+
+    void ReadFromMemory();
+  };
+
+#pragma pack(pop)
   u8 GetStageID();
 
   void WindWakerTrainerFrame();

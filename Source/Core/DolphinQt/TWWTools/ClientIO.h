@@ -5,7 +5,7 @@
 #define DOLPHIN_OUT_PIPE L"\\\\.\\pipe\\fromDolphin"
 #define DOLPHIN_IN_PIPE  L"\\\\.\\pipe\\toDolphin"
 
-#define PIPE_BUFFER_SIZE 256
+#define PIPE_BUFFER_SIZE 1024
 
 #define SEND_PLAYERSTATUS 1
 #define SEND_WORLDSTATE 2

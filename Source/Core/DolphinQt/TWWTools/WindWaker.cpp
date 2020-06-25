@@ -46,9 +46,56 @@ namespace TWWTools
     questStatus.charts    = Memory::Read_U64(PLAYER_CHARTS_ADDR);
   }
 
+  StageInfo GetStageInfo(u32 addr)
+  {
+    StageInfo temp;
+    memset(&temp, 0, sizeof(StageInfo));
+
+    u8* infoPtr = Memory::GetPointer(addr);
+    if (infoPtr == nullptr)
+      return temp;
+
+    memcpy(&temp, infoPtr, sizeof(StageInfo));
+    return temp;
+  }
+
   u8 GetStageID()
   {
-    return PowerPC::Read_U8(0x803C53A4);
+    return Memory::Read_U8(STAGE_ID);
+  }
+
+  void WorldState::ReadFromMemory()
+  {
+    u8* currentSection = Memory::GetPointer(PLAYER_NAME);
+    memcpy(&playerName, currentSection, 8);
+
+    stageID = GetStageID();
+
+    currentSection = Memory::GetPointer(STAGE_NAME);
+    memcpy(&stageName, currentSection, 8);
+
+    zone = Memory::Read_U8(CURRENT_ZONE);
+
+    sea       = GetStageInfo(STAGEINFO_SEA);
+    sea_alt   = GetStageInfo(STAGEINFO_SEA_ALT);
+    ff        = GetStageInfo(STAGEINFO_FF);
+    drc       = GetStageInfo(STAGEINFO_DRC);
+
+    fw        = GetStageInfo(STAGEINFO_FW);
+    totg      = GetStageInfo(STAGEINFO_TOTG);
+    earth     = GetStageInfo(STAGEINFO_EARTH);
+    wind      = GetStageInfo(STAGEINFO_WIND);
+
+    ganon     = GetStageInfo(STAGEINFO_GANON);
+    hyrule    = GetStageInfo(STAGEINFO_HYRULE);
+    ships     = GetStageInfo(STAGEINFO_SHIPS);
+    houses    = GetStageInfo(STAGEINFO_HOUSES);
+
+    caves     = GetStageInfo(STAGEINFO_CAVES);
+    caves_alt = GetStageInfo(STAGEINFO_CAVES_ALT);
+    chuchu    = GetStageInfo(STAGEINFO_CHUCHU);
+
+    local     = GetStageInfo(STAGEINFO_LOCAL);
   }
 
   void WindWakerTrainerFrame()

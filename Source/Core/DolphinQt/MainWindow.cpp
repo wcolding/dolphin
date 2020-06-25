@@ -1778,15 +1778,22 @@ DWORD WINAPI WindWakerTrainerThread(LPVOID lpParam)
   //}
 
   TWWTools::PlayerStatus playerStatus;
+  TWWTools::WorldState worldState;
 
   char statusBuffer[PLAYER_STATUS_SIZE];
   memset(&statusBuffer, 0, PLAYER_STATUS_SIZE);
 
+  char worldStateBuffer[WORLD_STATE_SIZE];
+  memset(&worldStateBuffer, 0, WORLD_STATE_SIZE);
+
   while (true)
   {
     playerStatus.ReadFromMemory();
+    worldState.ReadFromMemory();
     memcpy(&statusBuffer, &playerStatus, PLAYER_STATUS_SIZE);
     client.SendClient(SEND_PLAYERSTATUS, statusBuffer, PLAYER_STATUS_SIZE);
+    memcpy(&worldStateBuffer, &worldState, WORLD_STATE_SIZE);
+    client.SendClient(SEND_WORLDSTATE, worldStateBuffer, WORLD_STATE_SIZE);
     Sleep(500);
   }
   return 0;
