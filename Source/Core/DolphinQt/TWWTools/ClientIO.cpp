@@ -17,7 +17,6 @@ namespace TWWTools
     memcpy(&msg[4], buffer, len);
 
     WriteFile(outPipe, msg, (DWORD)(len + 4), bytesIO, 0);
-    //PrintMessage("Buffer size " + std::to_string(len) + " written");
   }
 
   void ClientHandler::ReceiveClient()
@@ -132,6 +131,20 @@ namespace TWWTools
         u16 numKeys = 0;
         memcpy(&numKeys, &msg[4], 2);
         AddKeys(numKeys);
+        break;
+      }
+      case UPGRADE_ITEM:
+      {
+        int itemCode = 0;
+        memcpy(&itemCode, &msg[4], 4);
+        UpgradeItem(itemCode);
+        break;
+      }
+      case DOWNGRADE_ITEM:
+      {
+        int itemCode = 0;
+        memcpy(&itemCode, &msg[4], 4);
+        DowngradeItem(itemCode);
         break;
       }
       default:

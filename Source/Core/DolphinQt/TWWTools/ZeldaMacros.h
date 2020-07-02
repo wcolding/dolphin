@@ -5,9 +5,11 @@
 #define Y_BUTTON_ITEM 0x803CA7DC
 #define Z_BUTTON_ITEM 0x803CA7DD
 
-#define UPGRADE_PICTOBOX2 0x01
-#define UPGRADE_BOW2 0x02
-#define UPGRADE_BOW3 0x04
+#define SET_PICTOBOX 1
+#define SET_BOW      2
+#define SET_SWORD    3
+#define SET_SHIELD   4
+#define SET_MAGIC    5
 
 namespace TWWTools
 {
@@ -37,7 +39,11 @@ namespace TWWTools
   void SetSword(int swordLvl);
   void SetShield(int shieldLvl);
 
-  void UpdateEquipButtons(int command);
+  void UpdateEquipButtons(int itemCode);
+
+  void UpgradeItem(int itemCode);
+  void DowngradeItem(int itemCode);
+  void RemoveItem(u8 item);
 
   void AddKeys(u16 keys);
 }

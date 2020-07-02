@@ -11,6 +11,9 @@
 #define SEND_WORLDSTATE 2
 #define GIVE_ITEM 3
 #define GIVE_KEYS 4
+#define UPGRADE_ITEM 5
+#define DOWNGRADE_ITEM 6
+#define REVOKE_ITEM 7
 
 namespace TWWTools
 {

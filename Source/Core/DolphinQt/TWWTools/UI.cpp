@@ -68,9 +68,12 @@ namespace TWWTools
       msg = "Bow (Light Arrows)";
       break;
 
+    case WWItem::Telecope:
+      msg = "Telescope";
+      break;
+
     case WWItem::NoItem:
       msg = "No item";
-
       break;
 
     default:

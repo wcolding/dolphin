@@ -3,11 +3,14 @@
 #include "WindWaker.h"
 #include "UI.h"
 
+#define printItem(item) TWWTools::ItemMsg(WWItem::item)
+
 namespace TWWTools
 {
   void GiveTelescope()
   {
     Memory::Write_U8(WWItem::Telecope, PLAYER_INV_ADDR);
+    printItem(Telecope);
   }
 
   void GiveSail()
@@ -50,13 +53,15 @@ namespace TWWTools
     {
     case 0:
       Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 8);
+      UpdateEquipButtons(SET_PICTOBOX);
       break;
     case 1:
       Memory::Write_U8(WWItem::PictoBox1, PLAYER_INV_ADDR + 8);
+      UpdateEquipButtons(SET_PICTOBOX);
       break;
     case 2:
       Memory::Write_U8(WWItem::PictoBox2, PLAYER_INV_ADDR + 8);
-      UpdateEquipButtons(UPGRADE_PICTOBOX2);
+      UpdateEquipButtons(SET_PICTOBOX);
       break;
     default:
       break;
@@ -85,20 +90,22 @@ namespace TWWTools
     case 0:
       Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 12);
       Memory::Write_U8(0, PLAYER_BOWS);
+      UpdateEquipButtons(SET_BOW);
       break;
     case 1:
       Memory::Write_U8(WWItem::Bow1, PLAYER_INV_ADDR + 12);
       Memory::Write_U8(0b00000001, PLAYER_BOWS);
+      UpdateEquipButtons(SET_BOW);
       break;
     case 2:
       Memory::Write_U8(WWItem::Bow2, PLAYER_INV_ADDR + 12);
       Memory::Write_U8(0b00000011, PLAYER_BOWS);
-      UpdateEquipButtons(UPGRADE_BOW2);
+      UpdateEquipButtons(SET_BOW);
       break;
     case 3:
       Memory::Write_U8(WWItem::Bow3, PLAYER_INV_ADDR + 12);
       Memory::Write_U8(0b00000111, PLAYER_BOWS);
-      UpdateEquipButtons(UPGRADE_BOW3);
+      UpdateEquipButtons(SET_BOW);
       break;
     default:
       break;
@@ -190,44 +197,170 @@ namespace TWWTools
     }
   }
 
-  void UpdateEquipButtons(int command)
+  void UpdateEquipButtons(int itemCode)
   {
     u8* equipsPtr = Memory::GetPointer(X_BUTTON_ITEM);
     u8 equips[3];
     memcpy(&equips, equipsPtr, 3);
+    WWItem currentItem;
 
-    switch (command)
+    switch (itemCode)
     {
-    case UPGRADE_PICTOBOX2:
+    case SET_PICTOBOX:
+      currentItem = (WWItem)Memory::Read_U8(PLAYER_INV_ADDR + 8);
+
       for (int i = 0; i < 3; i++)
       {
-        if (equips[i] == WWItem::PictoBox1)
+        if ((equips[i] == WWItem::PictoBox1) || (equips[i] == WWItem::PictoBox2))
         {
-          Memory::Write_U8(WWItem::PictoBox2, X_BUTTON_ITEM + i);
+          Memory::Write_U8(currentItem, X_BUTTON_ITEM + i);
         }
       }
       break;
-    case UPGRADE_BOW2:
+    case SET_BOW:
+      currentItem = (WWItem)Memory::Read_U8(PLAYER_INV_ADDR + 12);
       for (int i = 0; i < 3; i++)
       {
-        if (equips[i] == WWItem::Bow1)
+        if ((equips[i] == WWItem::Bow1) || (equips[i] == WWItem::Bow2) || (equips[i] == WWItem::Bow3))
         {
-          Memory::Write_U8(WWItem::Bow2, X_BUTTON_ITEM + i);
-        }
-      }
-      break;
-    case UPGRADE_BOW3:
-      for (int i = 0; i < 3; i++)
-      {
-        if (equips[i] == WWItem::Bow2)
-        {
-          Memory::Write_U8(WWItem::Bow3, X_BUTTON_ITEM + i);
+          Memory::Write_U8(currentItem, X_BUTTON_ITEM + i);
         }
       }
       break;
     default:
       break;
     }
+
+  }
+
+  // Takes an item code as an argument and upgrades that item by one level if possible
+  void UpgradeItem(int itemCode)
+  {
+    WWItem currentItem;
+
+    switch (itemCode)
+    {
+    case SET_PICTOBOX:
+    {
+      currentItem = (WWItem)Memory::Read_U8(PLAYER_INV_ADDR + 8);
+      if (currentItem == WWItem::NoItem)
+        SetPictoBox(1);
+      if (currentItem == WWItem::PictoBox1)
+        SetPictoBox(2);
+      break;
+    }
+    case SET_BOW:
+    {
+      currentItem = (WWItem)Memory::Read_U8(PLAYER_INV_ADDR + 12);
+      if (currentItem == WWItem::NoItem)
+        SetBow(1);
+      if (currentItem == WWItem::Bow1)
+        SetBow(2);
+      if (currentItem == WWItem::Bow2)
+        SetBow(3);
+      break;
+    }
+    case SET_SWORD:
+    {
+      currentItem = (WWItem)Memory::Read_U8(PLAYER_STATUS_ADDR + 14);
+      if (currentItem == WWItem::NoItem)
+        SetSword(1);
+      if (currentItem == WWItem::Sword1)
+        SetSword(2);
+      if (currentItem == WWItem::Sword2)
+        SetSword(3);
+      if (currentItem == WWItem::Sword3)
+        SetSword(4);
+      break;
+    }
+    case SET_SHIELD:
+    {
+      currentItem = (WWItem)Memory::Read_U8(PLAYER_STATUS_ADDR + 15);
+      if (currentItem == WWItem::NoItem)
+        SetShield(1);
+      if (currentItem == WWItem::Shield1)
+        SetShield(2);
+      break;
+    }
+    case SET_MAGIC:
+    {
+      u8 currentMaxMagic = Memory::Read_U8(PLAYER_STATUS_ADDR + 19);
+      if (currentMaxMagic < 0x10)
+        Memory::Write_U8(0x10, PLAYER_STATUS_ADDR + 19);
+      if (currentMaxMagic == 0x10)
+        Memory::Write_U8(0x20, PLAYER_STATUS_ADDR + 19);
+      break;
+    }
+    default:
+      break;
+    }
+  }
+
+  // Takes an item code as an argument and downgrades that item or removes it
+  void DowngradeItem(int itemCode)
+  {
+    WWItem currentItem;
+
+    switch (itemCode)
+    {
+    case SET_PICTOBOX:
+    {
+      currentItem = (WWItem)Memory::Read_U8(PLAYER_INV_ADDR + 8);
+      if (currentItem == WWItem::PictoBox1)
+        SetPictoBox(0);
+      if (currentItem == WWItem::PictoBox2)
+        SetPictoBox(1);
+      break;
+    }
+    case SET_BOW:
+    {
+      currentItem = (WWItem)Memory::Read_U8(PLAYER_INV_ADDR + 12);
+      if (currentItem == WWItem::Bow1)
+        SetBow(0);
+      if (currentItem == WWItem::Bow2)
+        SetBow(1);
+      if (currentItem == WWItem::Bow3)
+        SetBow(2);
+      break;
+    }
+    case SET_SWORD:
+    {
+      currentItem = (WWItem)Memory::Read_U8(PLAYER_STATUS_ADDR + 14);
+      if (currentItem == WWItem::Sword1)
+        SetSword(0);
+      if (currentItem == WWItem::Sword2)
+        SetSword(1);
+      if (currentItem == WWItem::Sword3)
+        SetSword(2);
+      if (currentItem == WWItem::Sword4)
+        SetSword(3);
+      break;
+    }
+    case SET_SHIELD:
+    {
+      currentItem = (WWItem)Memory::Read_U8(PLAYER_STATUS_ADDR + 15);
+      if (currentItem == WWItem::Shield1)
+        SetShield(0);
+      if (currentItem == WWItem::Shield2)
+        SetShield(1);
+      break;
+    }
+    case SET_MAGIC:
+    {
+      u8 currentMaxMagic = Memory::Read_U8(PLAYER_STATUS_ADDR + 19);
+      if (currentMaxMagic == 0x10)
+        Memory::Write_U8(0, PLAYER_STATUS_ADDR + 19);
+      if (currentMaxMagic == 0x20)
+        Memory::Write_U8(0x10, PLAYER_STATUS_ADDR + 19);
+      break;
+    }
+    default:
+      break;
+    }
+  }
+
+  void RemoveItem(u8 item)
+  {
 
   }
 
