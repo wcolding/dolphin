@@ -14,6 +14,10 @@
 #define UPGRADE_ITEM 5
 #define DOWNGRADE_ITEM 6
 #define REVOKE_ITEM 7
+#define GIVE_SONG 8
+#define REMOVE_SONG 9
+#define GIVE_PEARL 10
+#define REMOVE_PEARL 11
 
 namespace TWWTools
 {

@@ -147,6 +147,36 @@ namespace TWWTools
         DowngradeItem(itemCode);
         break;
       }
+      case REVOKE_ITEM:
+      {
+        u8 item = msg[4];
+        RemoveItem(item);
+        break;
+      }
+      case GIVE_SONG:
+      {
+        u8 song = msg[4];
+        AddSongs(song);
+        break;
+      }
+      case REMOVE_SONG:
+      {
+        u8 song = msg[4];
+        RemoveSongs(song);
+        break;
+      }
+      case GIVE_PEARL:
+      {
+        u8 pearl = msg[4];
+        AddPearls(pearl);
+        break;
+      }
+      case REMOVE_PEARL:
+      {
+        u8 pearl = msg[4];
+        RemovePearls(pearl);
+        break;
+      }
       default:
         break;
       }

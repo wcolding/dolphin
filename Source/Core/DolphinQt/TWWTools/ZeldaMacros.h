@@ -46,4 +46,22 @@ namespace TWWTools
   void RemoveItem(u8 item);
 
   void AddKeys(u16 keys);
+
+  void AddSongs(u8 songs);
+  void RemoveSongs(u8 songs);
+
+  void GiveWindsRequiem();
+  void GiveBalladofGales();
+  void GiveCommandMelody();
+  void GiveEarthGodsLyric();
+  void GiveWindGodsAria();
+  void GiveSongofPassing();
+
+  void AddPearls(u8 pearls);
+  void RemovePearls(u8 pearls);
+
+  void GiveDinsPearl();
+  void GiveFaroresPearl();
+  void GiveNayrusPearl();
+
 }

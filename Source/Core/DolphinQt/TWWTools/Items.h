@@ -96,7 +96,7 @@ namespace TWWTools
 
   } WWItem;
 
-  typedef enum
+  typedef enum : u8
   {
     WindsRequiem = 0x01,
     BalladofGales = 0x02,
@@ -106,7 +106,7 @@ namespace TWWTools
     SongofPassing = 0x20
   } WWSongMask;
 
-  typedef enum
+  typedef enum : u8
   {
     Nayru = 0x01,
     Din = 0x02,

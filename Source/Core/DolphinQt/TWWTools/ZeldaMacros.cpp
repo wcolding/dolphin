@@ -361,11 +361,146 @@ namespace TWWTools
 
   void RemoveItem(u8 item)
   {
+    switch (item)
+    {
+    case WWItem::Telecope:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR);
+      break;
+    case WWItem::Sail:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 1);
+      break;
+    case WWItem::WW:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 2);
+      break;
+    case WWItem::GrapplingHook:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 3);
+      break;
+    case WWItem::SpoilsBag:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 4);
+      break;
+    case WWItem::Boomerang:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 5);
+      break;
+    case WWItem::DekuLeaf:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 6);
+      break;
+    case WWItem::TingleTuner:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 7);
+      break;
+    case WWItem::Boots:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 9);
+      break;
+    case WWItem::MagicArmor:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 10);
+      break;
+    case WWItem::BaitBag:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 11);
+      break;
+    case WWItem::Bombs:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 13);
+      Memory::Write_U8(0, PLAYER_BOMBS);
+      break;
+    case WWItem::MailBag:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 18);
+      break;
+    case WWItem::Hookshot:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 19);
+      break;
+    case WWItem::Hammer:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_INV_ADDR + 20);
+      break;
+    case WWItem::Bracelet:
+      Memory::Write_U8(WWItem::NoItem, PLAYER_STATUS_ADDR + 16);
+      Memory::Write_U8(0, PLAYER_QUEST_ADDR + 2);
+    default:
+      break;
+    }
 
+    // Remove from equip buttons
+    u8* equipsPtr = Memory::GetPointer(X_BUTTON_ITEM);
+    u8 equips[3];
+    memcpy(&equips, equipsPtr, 3);
+
+    for (int i = 0; i < 3; i++)
+      if (equips[i] == item)
+        Memory::Write_U8(WWItem::NoItem, X_BUTTON_ITEM + i);
   }
 
   void AddKeys(u16 keys)
   {
     Memory::Write_U16(keys, ADD_KEYS);
+  }
+
+  void AddSongs(u8 songs)
+  {
+    u8 curSongs = Memory::Read_U8(PLAYER_QUEST_ADDR + 9);
+    curSongs |= songs;
+    Memory::Write_U8(curSongs, PLAYER_QUEST_ADDR + 9);
+  }
+
+  void RemoveSongs(u8 songs)
+  {
+    u8 curSongs = Memory::Read_U8(PLAYER_QUEST_ADDR + 9);
+    curSongs ^= songs;
+    Memory::Write_U8(curSongs, PLAYER_QUEST_ADDR + 9);
+  }
+
+  void GiveWindsRequiem()
+  {
+    AddSongs(WWSongMask::WindsRequiem);
+  }
+
+  void GiveBalladofGales()
+  {
+    AddSongs(WWSongMask::BalladofGales);
+  }
+
+  void GiveCommandMelody()
+  {
+    AddSongs(WWSongMask::CommandMelody);
+  }
+
+  void GiveEarthGodsLyric()
+  {
+    AddSongs(WWSongMask::EarthGodsLyric);
+  }
+
+  void GiveWindGodsAria()
+  {
+    AddSongs(WWSongMask::WindGodsAria);
+  }
+
+  void GiveSongofPassing()
+  {
+    AddSongs(WWSongMask::SongofPassing);
+  }
+
+  void AddPearls(u8 pearls)
+  {
+    u8 curPearls = Memory::Read_U8(PLAYER_QUEST_ADDR + 11);
+    curPearls |= pearls;
+    Memory::Write_U8(curPearls, PLAYER_QUEST_ADDR + 11);
+  }
+
+  void RemovePearls(u8 pearls)
+  {
+    u8 curPearls = Memory::Read_U8(PLAYER_QUEST_ADDR + 11);
+    curPearls ^= pearls;
+    Memory::Write_U8(curPearls, PLAYER_QUEST_ADDR + 11);
+  }
+
+  void GiveDinsPearl()
+  {
+    AddPearls(WWPearlMask::Din);
+  }
+
+  void GiveFaroresPearl()
+  {
+    AddPearls(WWPearlMask::Farore);
+  }
+
+  void GiveNayrusPearl()
+  {
+    AddPearls(WWPearlMask::Nayru);
   }
 }
