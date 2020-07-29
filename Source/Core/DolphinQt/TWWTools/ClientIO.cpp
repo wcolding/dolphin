@@ -54,6 +54,9 @@ namespace TWWTools
         case WWItem::GrapplingHook:
           GiveGrapplingHook();
           break;
+        case WWItem::SpoilsBag:
+          GiveSpoilsBag();
+          break;
         case WWItem::Boomerang:
           GiveBoomerang();
           break;
