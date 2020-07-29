@@ -18,6 +18,7 @@
 #define REMOVE_SONG 9
 #define GIVE_PEARL 10
 #define REMOVE_PEARL 11
+#define SET_TRIFORCE 12
 
 namespace TWWTools
 {

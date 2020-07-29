@@ -177,6 +177,12 @@ namespace TWWTools
         RemovePearls(pearl);
         break;
       }
+      case SET_TRIFORCE:
+      {
+        u8 triforce = msg[4];
+        SetTriforce(triforce);
+        break;
+      }
       default:
         break;
       }

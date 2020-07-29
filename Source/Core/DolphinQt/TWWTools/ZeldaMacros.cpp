@@ -503,4 +503,9 @@ namespace TWWTools
   {
     AddPearls(WWPearlMask::Nayru);
   }
+
+  void SetTriforce(u8 triforce)
+  {
+    Memory::Write_U8(triforce, PLAYER_QUEST_ADDR + 10);
+  }
 }

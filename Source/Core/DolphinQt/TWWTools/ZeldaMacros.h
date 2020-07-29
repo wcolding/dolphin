@@ -64,4 +64,6 @@ namespace TWWTools
   void GiveFaroresPearl();
   void GiveNayrusPearl();
 
+  void SetTriforce(u8 triforce);
+
 }
