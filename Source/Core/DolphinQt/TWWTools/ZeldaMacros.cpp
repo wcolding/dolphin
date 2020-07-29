@@ -286,9 +286,15 @@ namespace TWWTools
     {
       u8 currentMaxMagic = Memory::Read_U8(PLAYER_STATUS_ADDR + 19);
       if (currentMaxMagic < 0x10)
-        Memory::Write_U8(0x10, PLAYER_STATUS_ADDR + 19);
+      {
+        Memory::Write_U8(0x10, PLAYER_STATUS_ADDR + 19); // max magic
+        Memory::Write_U8(0x10, PLAYER_STATUS_ADDR + 20); // current magic
+      }
       if (currentMaxMagic == 0x10)
-        Memory::Write_U8(0x20, PLAYER_STATUS_ADDR + 19);
+      {
+        Memory::Write_U8(0x20, PLAYER_STATUS_ADDR + 19); // max magic
+        Memory::Write_U8(0x20, PLAYER_STATUS_ADDR + 20); // current magic
+      }
       break;
     }
     default:
