@@ -39,6 +39,7 @@ namespace TWWTools
   void GiveSkullHammer();
 
   void GiveBracelet();
+  void GiveHurricaneSpin();
   void SetSword(int swordLvl);
   void SetShield(int shieldLvl);
 

@@ -24,7 +24,7 @@ namespace TWWTools
     inventory.sword      = Memory::Read_U8(PLAYER_STATUS_ADDR + 14);
     inventory.shield     = Memory::Read_U8(PLAYER_STATUS_ADDR + 15);
     inventory.bracelets  = Memory::Read_U8(PLAYER_STATUS_ADDR + 16);
-    inventory.spinAttack = Memory::Read_U8(0x803C5295);
+    inventory.spinAttack = Memory::Read_U8(PLAYER_SWORD_SPIN);
 
     ammo.bowCapacity     = Memory::Read_U8(0x803C4C77);
     ammo.bowAmmo         = Memory::Read_U8(0x803C4C71);

@@ -147,6 +147,14 @@ namespace TWWTools
     Memory::Write_U8(1, PLAYER_QUEST_ADDR + 2);
   }
 
+  // This only works in randomizer
+  void GiveHurricaneSpin()
+  {
+    u8 spinByte = Memory::Read_U8(PLAYER_SWORD_SPIN);
+    spinByte |= 0x01;
+    Memory::Write_U8(spinByte, PLAYER_SWORD_SPIN);
+  }
+
   void SetSword(int swordLvl)
   {
     switch (swordLvl)
@@ -488,6 +496,18 @@ namespace TWWTools
     case WWItem::Bracelet:
       Memory::Write_U8(WWItem::NoItem, PLAYER_STATUS_ADDR + 16);
       Memory::Write_U8(0, PLAYER_QUEST_ADDR + 2);
+      break;
+    case WWItem::HurricaneSpin:
+    {
+      u8 spinByte = Memory::Read_U8(PLAYER_SWORD_SPIN);
+
+      if (HasFlag(spinByte, 0x01))
+      {
+        spinByte ^= 0x01;
+        Memory::Write_U8(spinByte, PLAYER_SWORD_SPIN);
+      }
+      break;
+    }
     default:
       break;
     }

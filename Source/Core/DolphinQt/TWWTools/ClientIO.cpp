@@ -124,6 +124,9 @@ namespace TWWTools
         case WWItem::Shield2:
           SetShield(2);
           break;
+        case WWItem::HurricaneSpin:
+          GiveHurricaneSpin();
+          break;
         default:
           break;
         }
