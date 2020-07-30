@@ -502,6 +502,23 @@ namespace TWWTools
     u8 curPearls = Memory::Read_U8(PLAYER_QUEST_ADDR + 11);
     curPearls |= pearls;
     Memory::Write_U8(curPearls, PLAYER_QUEST_ADDR + 11);
+
+    // If all pearls are acquired, place them in the pedestals and raise TotG
+    // This is behavior that randomizer does automatically when giving pearls
+    if (HasFlag(curPearls, WWPearlMask::Din) && HasFlag(curPearls, WWPearlMask::Farore) && HasFlag(curPearls, WWPearlMask::Nayru))
+    {
+      u8 placed       = Memory::Read_U8(0x803C5240);
+      u8 totgRaised   = Memory::Read_U8(0x803C524A);
+      u8 totgCutscene = Memory::Read_U8(0x803C525A);
+
+      placed       |= 0xD0; // all three pearls
+      totgRaised   |= 0x40;
+      totgCutscene |= 0x80;
+
+      Memory::Write_U8(placed, 0x803C5240);
+      Memory::Write_U8(totgRaised, 0x803C524A);
+      Memory::Write_U8(totgCutscene, 0x803C525A);
+    }
   }
 
   void RemovePearls(u8 pearls)
@@ -509,6 +526,31 @@ namespace TWWTools
     u8 curPearls = Memory::Read_U8(PLAYER_QUEST_ADDR + 11);
     curPearls ^= pearls;
     Memory::Write_U8(curPearls, PLAYER_QUEST_ADDR + 11);
+
+    if (pearls != 0) // this should always return True, we aren't calling this for no reason
+    {
+      u8 placed = Memory::Read_U8(0x803C5240);
+      u8 totgRaised = Memory::Read_U8(0x803C524A);
+      u8 totgCutscene = Memory::Read_U8(0x803C525A);
+
+      // un-set all pearls
+      if (HasFlag(placed, 0x80)) // Din
+        placed ^= 0x80;
+      if (HasFlag(placed, 0x40)) // Farore
+        placed ^= 0x40;
+      if (HasFlag(placed, 0x10)) // Nayru
+        placed ^= 0x10;
+
+      if (HasFlag(totgRaised, 0x40))
+        totgRaised ^= 0x40;
+
+      if (HasFlag(totgCutscene, 0x80))
+        totgCutscene ^= 0x80;
+
+      Memory::Write_U8(placed, 0x803C5240);
+      Memory::Write_U8(totgRaised, 0x803C524A);
+      Memory::Write_U8(totgCutscene, 0x803C525A);
+    }
   }
 
   void GiveDinsPearl()
@@ -529,5 +571,13 @@ namespace TWWTools
   void SetTriforce(u8 triforce)
   {
     Memory::Write_U8(triforce, PLAYER_QUEST_ADDR + 10);
+  }
+
+
+  bool HasFlag(u8 value, u8 flag)
+  {
+    if ((value & flag) != 0)
+      return true;
+    return false;
   }
 }

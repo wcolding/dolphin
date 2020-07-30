@@ -67,4 +67,5 @@ namespace TWWTools
 
   void SetTriforce(u8 triforce);
 
+  bool HasFlag(u8 value, u8 flag);
 }
