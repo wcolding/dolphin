@@ -19,6 +19,8 @@
 #define GIVE_PEARL 10
 #define REMOVE_PEARL 11
 #define SET_TRIFORCE 12
+#define SET_STATUES 13
+#define SET_BOTTLES 14
 
 namespace TWWTools
 {

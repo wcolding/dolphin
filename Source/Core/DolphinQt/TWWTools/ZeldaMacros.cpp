@@ -304,6 +304,39 @@ namespace TWWTools
         Memory::Write_U8(1, PLAYER_STATUS_ADDR + 18);
       if (wallet == 1)
         Memory::Write_U8(2, PLAYER_STATUS_ADDR + 18);
+      break;
+    }
+    case SET_BOW_CAPACITY:
+    {
+      u32 cap_addr = 0x803C4C77;
+      u8 capacity = Memory::Read_U8(cap_addr);
+      if (capacity == 30)
+      {
+        Memory::Write_U8(60, cap_addr);
+        Memory::Write_U8(60, 0x803C4C71);
+      }
+      if (capacity == 60)
+      {
+        Memory::Write_U8(99, cap_addr);
+        Memory::Write_U8(99, 0x803C4C71);
+      }
+      break;
+    }
+    case SET_BOMB_CAPACITY:
+    {
+      u32 cap_addr = 0x803C4C78;
+      u8 capacity = Memory::Read_U8(cap_addr);
+      if (capacity == 30)
+      {
+        Memory::Write_U8(60, cap_addr);
+        Memory::Write_U8(60, 0x803C4C72);
+      }
+      if (capacity == 60)
+      {
+        Memory::Write_U8(99, cap_addr);
+        Memory::Write_U8(99, 0x803C4C72);
+      }
+      break;
     }
     default:
       break;
@@ -375,6 +408,27 @@ namespace TWWTools
         Memory::Write_U8(0, PLAYER_STATUS_ADDR + 18);
       if (wallet > 1)
         Memory::Write_U8(1, PLAYER_STATUS_ADDR + 18);
+      break;
+    }
+    case SET_BOW_CAPACITY:
+    {
+      u32 cap_addr = 0x803C4C77;
+      u8 capacity = Memory::Read_U8(cap_addr);
+      if (capacity == 60)
+        Memory::Write_U8(30, cap_addr);
+      if (capacity == 99)
+        Memory::Write_U8(60, cap_addr);
+      break;
+    }
+    case SET_BOMB_CAPACITY:
+    {
+      u32 cap_addr = 0x803C4C78;
+      u8 capacity = Memory::Read_U8(cap_addr);
+      if (capacity == 60)
+        Memory::Write_U8(30, cap_addr);
+      if (capacity == 99)
+        Memory::Write_U8(60, cap_addr);
+      break;
     }
     default:
       break;

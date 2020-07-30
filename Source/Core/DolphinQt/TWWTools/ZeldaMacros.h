@@ -11,6 +11,8 @@
 #define SET_SHIELD   4
 #define SET_MAGIC    5
 #define SET_WALLET   6
+#define SET_BOW_CAPACITY 7
+#define SET_BOMB_CAPACITY 8
 
 namespace TWWTools
 {
