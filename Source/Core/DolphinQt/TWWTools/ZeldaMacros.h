@@ -69,6 +69,7 @@ namespace TWWTools
   void GiveNayrusPearl();
 
   void SetTriforce(u8 triforce);
+  void SetStatues(u8 statues);
 
   bool HasFlag(u8 value, u8 flag);
 }

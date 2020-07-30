@@ -42,7 +42,7 @@ namespace TWWTools
     questStatus.songs     = Memory::Read_U8(PLAYER_QUEST_ADDR + 9);
     questStatus.triforce  = Memory::Read_U8(PLAYER_QUEST_ADDR + 10);
     questStatus.pearls    = Memory::Read_U8(PLAYER_QUEST_ADDR + 11);
-    questStatus.statues   = Memory::Read_U8(0x803C5296);
+    questStatus.statues   = Memory::Read_U8(PLAYER_STATUES);
     questStatus.charts    = Memory::Read_U64(PLAYER_CHARTS_ADDR);
   }
 

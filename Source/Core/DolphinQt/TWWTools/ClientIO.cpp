@@ -189,6 +189,12 @@ namespace TWWTools
         SetTriforce(triforce);
         break;
       }
+      case SET_STATUES:
+      {
+        u8 statues = msg[4];
+        SetStatues(statues);
+        break;
+      }
       default:
         break;
       }

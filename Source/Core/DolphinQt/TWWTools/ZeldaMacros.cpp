@@ -648,6 +648,11 @@ namespace TWWTools
   }
 
 
+  void SetStatues(u8 statues)
+  {
+    Memory::Write_U8(statues, PLAYER_STATUES);
+  }
+
   bool HasFlag(u8 value, u8 flag)
   {
     if ((value & flag) != 0)
