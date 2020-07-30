@@ -124,6 +124,13 @@ namespace TWWTools
       return;
 
     Memory::Write_U8(contents, PLAYER_INV_ADDR + 14 + slot); //14-17
+
+    // Set the timer for forest water so it doesn't expire immediately outside of Forest Haven
+    // Default time is 20 min, set in frames
+    // 30 fps * 60 sec * 20 min = 36,000 frames = 0x8CA0
+    // Only starts counting down once the player moves to another area
+    if (contents == WWBottleContents::ForestWater)
+      Memory::Write_U16(0x8CA0, 0x803C4C6E);
   }
 
   void GiveMailBag()

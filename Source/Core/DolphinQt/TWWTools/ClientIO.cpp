@@ -195,6 +195,14 @@ namespace TWWTools
         SetStatues(statues);
         break;
       }
+      case SET_BOTTLES:
+      {
+        int index = 0;
+        memcpy(&index, &msg[4], 4);
+        u8 value = msg[8];
+        SetBottleSlot(index, value);
+        break;
+      }
       default:
         break;
       }
