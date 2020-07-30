@@ -10,6 +10,7 @@
 #define SET_SWORD    3
 #define SET_SHIELD   4
 #define SET_MAGIC    5
+#define SET_WALLET   6
 
 namespace TWWTools
 {

@@ -297,6 +297,14 @@ namespace TWWTools
       }
       break;
     }
+    case SET_WALLET:
+    {
+      u8 wallet = Memory::Read_U8(PLAYER_STATUS_ADDR + 18);
+      if (wallet < 1)
+        Memory::Write_U8(1, PLAYER_STATUS_ADDR + 18);
+      if (wallet == 1)
+        Memory::Write_U8(2, PLAYER_STATUS_ADDR + 18);
+    }
     default:
       break;
     }
@@ -359,6 +367,14 @@ namespace TWWTools
       if (currentMaxMagic == 0x20)
         Memory::Write_U8(0x10, PLAYER_STATUS_ADDR + 19);
       break;
+    }
+    case SET_WALLET:
+    {
+      u8 wallet = Memory::Read_U8(PLAYER_STATUS_ADDR + 18);
+      if (wallet == 1)
+        Memory::Write_U8(0, PLAYER_STATUS_ADDR + 18);
+      if (wallet > 1)
+        Memory::Write_U8(1, PLAYER_STATUS_ADDR + 18);
     }
     default:
       break;
