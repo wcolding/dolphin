@@ -21,6 +21,8 @@
 #define SET_TRIFORCE 12
 #define SET_STATUES 13
 #define SET_BOTTLES 14
+#define GIVE_CHART 15
+#define REMOVE_CHART 16
 
 namespace TWWTools
 {

@@ -72,4 +72,7 @@ namespace TWWTools
   void SetStatues(u8 statues);
 
   bool HasFlag(u8 value, u8 flag);
+
+  void GiveCharts(u64 mask);
+  void RemoveCharts(u64 mask);
 }

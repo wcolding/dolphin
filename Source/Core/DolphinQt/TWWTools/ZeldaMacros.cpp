@@ -660,6 +660,21 @@ namespace TWWTools
     Memory::Write_U8(statues, PLAYER_STATUES);
   }
 
+
+  void GiveCharts(u64 mask)
+  {
+    u64 curCharts = Memory::Read_U64(PLAYER_CHARTS_ADDR);
+    curCharts |= mask;
+    Memory::Write_U64(curCharts, PLAYER_CHARTS_ADDR);
+  }
+
+  void RemoveCharts(u64 mask)
+  {
+    u64 curCharts = Memory::Read_U64(PLAYER_CHARTS_ADDR);
+    curCharts ^= mask;
+    Memory::Write_U64(curCharts, PLAYER_CHARTS_ADDR);
+  }
+
   bool HasFlag(u8 value, u8 flag)
   {
     if ((value & flag) != 0)

@@ -203,6 +203,20 @@ namespace TWWTools
         SetBottleSlot(index, value);
         break;
       }
+      case GIVE_CHART:
+      {
+        u64 charts = 0;
+        memcpy(&charts, &msg[4], 8);
+        GiveCharts(charts);
+        break;
+      }
+      case REMOVE_CHART:
+      {
+        u64 charts = 0;
+        memcpy(&charts, &msg[4], 8);
+        RemoveCharts(charts);
+        break;
+      }
       default:
         break;
       }
