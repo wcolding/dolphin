@@ -125,7 +125,7 @@ namespace TWWTools
 
     Memory::Write_U8(contents, PLAYER_INV_ADDR + 14 + slot); //14-17
 
-    // Set the timer for forest water so it doesn't expire immediately outside of Forest Haven
+    // Set the timer for forest water so it doesn't expire immediately
     // Default time is 20 min, set in frames
     // 30 fps * 60 sec * 20 min = 36,000 frames = 0x8CA0
     // Only starts counting down once the player moves to another area
@@ -673,6 +673,15 @@ namespace TWWTools
     u64 curCharts = Memory::Read_U64(PLAYER_CHARTS_ADDR);
     curCharts ^= mask;
     Memory::Write_U64(curCharts, PLAYER_CHARTS_ADDR);
+  }
+
+
+  void SetMailBagSlot(int slot, u8 mail)
+  {
+    if (slot < 0 || slot > 7)
+      return;
+
+    Memory::Write_U8(mail, PLAYER_BAGS_ADDR + (8 * 2) + slot);
   }
 
   bool HasFlag(u8 value, u8 flag)

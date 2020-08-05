@@ -195,7 +195,7 @@ namespace TWWTools
         SetStatues(statues);
         break;
       }
-      case SET_BOTTLES:
+      case SET_BOTTLE_SLOT:
       {
         int index = 0;
         memcpy(&index, &msg[4], 4);
@@ -215,6 +215,14 @@ namespace TWWTools
         u64 charts = 0;
         memcpy(&charts, &msg[4], 8);
         RemoveCharts(charts);
+        break;
+      }
+      case SET_MAIL_SLOT:
+      {
+        int index = 0;
+        memcpy(&index, &msg[4], 4);
+        u8 value = msg[8];
+        SetMailBagSlot(index, value);
         break;
       }
       default:

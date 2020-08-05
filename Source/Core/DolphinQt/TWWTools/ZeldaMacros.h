@@ -75,4 +75,6 @@ namespace TWWTools
 
   void GiveCharts(u64 mask);
   void RemoveCharts(u64 mask);
+
+  void SetMailBagSlot(int slot, u8 mail);
 }
