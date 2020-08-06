@@ -353,6 +353,11 @@ namespace TWWTools
       }
       break;
     }
+    case SET_HEARTS:
+    {
+      AddHearts(4);
+      break;
+    }
     default:
       break;
     }
@@ -445,6 +450,11 @@ namespace TWWTools
         Memory::Write_U8(60, cap_addr);
       break;
     }
+    case SET_HEARTS:
+    {
+      AddHearts(-4);
+      break;
+    }
     default:
       break;
     }
@@ -532,6 +542,11 @@ namespace TWWTools
   void AddKeys(u16 keys)
   {
     Memory::Write_U16(keys, ADD_KEYS);
+  }
+
+  void AddHearts(u16 hearts)
+  {
+    Memory::Write_U16(hearts, ADD_HEARTS);
   }
 
   void AddSongs(u8 songs)

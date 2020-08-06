@@ -13,6 +13,7 @@
 #define SET_WALLET   6
 #define SET_BOW_CAPACITY 7
 #define SET_BOMB_CAPACITY 8
+#define SET_HEARTS   9
 
 namespace TWWTools
 {
@@ -50,6 +51,7 @@ namespace TWWTools
   void RemoveItem(u8 item);
 
   void AddKeys(u16 keys);
+  void AddHearts(u16 hearts);
 
   void AddSongs(u8 songs);
   void RemoveSongs(u8 songs);
