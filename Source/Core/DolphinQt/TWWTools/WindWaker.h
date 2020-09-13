@@ -68,12 +68,12 @@ namespace TWWTools
 
   typedef enum : u8
   {
-    Map = 0,
-    Compass = 0x01,
-    BigKey = 0x02,
-    BossDead = 0x04,
-    BossHC = 0x08,
-    BossIntro = 0x10
+    Map       = 0x01,
+    Compass   = 0x02,
+    BigKey    = 0x04,
+    BossDead  = 0x08,
+    BossHC    = 0x10,
+    BossIntro = 0x20
   } DungeonFlags;
 
 #pragma pack(push, 1)
